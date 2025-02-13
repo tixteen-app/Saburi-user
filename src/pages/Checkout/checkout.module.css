@@ -1,0 +1,202 @@
+.container {
+  width: 80%;
+  margin: 0 auto;
+  margin-top: 50px;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.innerContainer {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.leftContainer {
+  display: flex;
+  flex-direction: column;
+
+  width: 80%;
+  gap: 10px;
+}
+
+.rightContainer {
+  width: 50%;
+}
+
+.paymentHeading {
+  font-size: 1.4rem;
+
+}
+.Order_Placeed_div{
+  background: white;
+  height: 100vh;
+  margin: 0 auto;
+  position: fixed;
+  top: 0%;
+  left: 0%;
+  width: 100%;
+  z-index: 9999;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.Order_Placeed_gif{
+  width: 30%;
+}
+/* display: 'block', margin: '0 auto', position: 'fixed', top: '0%', left: '0%', height: '100%' , backgroundColor: 'white', zIndex: '9999' , width: '100%' */
+
+
+/* PaymentMethod.module.css */
+
+.paymentMethodContainer {
+  margin: 20px 0;
+}
+
+.heading {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+.radioGroup {
+  display: flex;
+  flex-direction: column;
+}
+
+.radioLabel {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.radioLabel img {
+  width: 200px;
+}
+
+.radioLabel span {
+  font-size: 18px;
+}
+
+.radioInput {
+  margin-right: 10px;
+  accent-color: black;
+  /* This sets the color of the radio button */
+}
+
+.logo {
+  width: 100px;
+  height: auto;
+}
+
+
+
+
+/* ===========paynow============ */
+
+.paynow {
+  display: flex;
+  flex-direction: column;
+  max-width: 500px;
+  /* width: 100%; */
+  margin-top: 20px;
+}
+
+.paynow div:first-child {
+  background: var(--orange);
+  padding: 6px;
+}
+
+.paynow div:last-child p {
+  font-size: 14px;
+  text-transform: uppercase;
+}
+
+.paynow div:last-child {
+  margin-top: 2px;
+  display: flex;
+  justify-content: space-between;
+  font-weight: 600;
+}
+
+.paynow div button {
+  width: 100%;
+  background: var(--orange);
+  border: 1px solid #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  padding: 10px;
+  font-size: 15px;
+  letter-spacing: 1.2px;
+  cursor: pointer;
+}
+
+
+@media(max-width:1200px) {
+  .container {
+    width: 94%;
+
+  }
+
+  .rightContainer {
+    width: 50%;
+  }
+
+  .leftContainer {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    gap: 10px;
+  }
+
+}
+
+@media(max-width:700px) {
+  .innerContainer {
+    flex-direction: column-reverse;
+    align-items: center;
+    width: 100%;
+  }
+
+  .rightContainer {
+    width: 90%;
+    margin-top: 2rem;
+  }
+
+  .leftContainer {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    gap: 10px;
+  }
+  .Order_Placeed_gif{
+    width: 90%;
+  }
+}
+
+@media(max-width:500px) {
+  .innerContainer {
+    flex-direction: column-reverse;
+    align-items: center;
+    width: 100%;
+    gap: 0;
+  }
+
+  .rightContainer {
+    width: 100%;
+  }
+
+  .leftContainer {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    gap: 10px;
+  }
+}

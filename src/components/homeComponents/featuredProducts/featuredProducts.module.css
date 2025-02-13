@@ -1,0 +1,31 @@
+.featuredProducts {
+  /* display: flex;
+  flex-direction: column; */
+  align-items: center;
+  background: linear-gradient(to bottom, var(--orange) 70%, #fff 50%);
+  width: 96%;
+  margin: auto;
+  margin-top: 50px;
+  position: relative;
+  border-radius: 30px 30px 0 0;
+}
+
+
+.featuredProducts h1 {
+  text-align: center;
+  padding-top: 25px;
+  font-size: 36px;
+  letter-spacing: 1.3px;
+}
+
+.products {
+  margin-top: 15px;
+  position: relative;
+
+}
+
+@media(max-width:600px) {
+  .featuredProducts h1 {
+    font-size: 30px;
+  }
+}

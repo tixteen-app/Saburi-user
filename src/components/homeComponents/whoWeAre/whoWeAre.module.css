@@ -1,0 +1,98 @@
+.container {
+  width: 80%;
+  margin: auto;
+  margin-top: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 100px;
+}
+
+.container img {
+  width: 25%;
+}
+
+.container div {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 15px;
+}
+
+.container div h1 {
+  font-size: 40px;
+  font-weight: normal;
+}
+
+.container div p span {
+  font-size: 36px;
+}
+
+.container div p {
+  width: 100%;
+  text-align: justify;
+  font-size: 20px;
+  letter-spacing: 1.1px;
+  line-height: 1.4;
+}
+
+.whoarewe {
+  display: none;
+}
+
+@media(max-width:1000px) {
+  .container {
+    width: 90%;
+    gap: 50px;
+  }
+
+  .container img {
+    width: 40%;
+  }
+}
+
+@media(max-width:700px) {
+  .container {
+    width: 92%;
+
+    gap: 30px;
+  }
+
+  .container img {
+    width: 40%;
+  }
+}
+
+@media(max-width:600px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .container div h1 {
+    display: none;
+  }
+
+  .whoarewe {
+    display: block;
+    font-size: 40px;
+    font-weight: normal;
+    margin-bottom: 10px;
+  }
+
+  .container {
+    gap: 10px;
+  }
+
+  .container div p {
+    width: 100%;
+    text-align: justify;
+    font-size: 18px;
+    letter-spacing: 0.8px;
+    line-height: 1.4;
+  }
+
+  .container div p span {
+    font-size: 30px;
+  }
+
+}

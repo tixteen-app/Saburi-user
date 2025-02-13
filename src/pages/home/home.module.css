@@ -1,0 +1,159 @@
+.yourFlavor {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.yourFlavor h1 {
+  margin-bottom: 20px;
+  letter-spacing: 1.4px;
+  font-size: 34px;
+}
+
+.yourFlavor .flavorProducts {
+  width: 70%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  place-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.flavorProducts div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  border: 1px solid #000;
+  padding: 20px;
+  padding-bottom: 10px;
+  border-radius: 15px;
+}
+
+.flavorProducts div img {
+  width: 120px;
+}
+
+
+/* ============ourBrands========== */
+
+.ourBrands {
+  margin-top: 80px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.ourBrands h1 {
+  margin-bottom: 40px;
+  letter-spacing: 1.4px;
+  font-size: 34px;
+}
+
+.ourBrandProvides {
+  width: 90%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  place-items: center;
+  justify-content: center;
+  gap: 120px;
+  row-gap: 60px;
+}
+
+.ourBrandProvides .brandContent {
+  display: flex;
+  flex-direction: column;
+  /* width: 250px; */
+  align-items: center;
+  gap: 18px;
+}
+
+.ourBrandProvides .brandContent img {
+  width: 250px;
+}
+
+.ourBrandProvides .brandContent div {
+  display: flex;
+  flex-direction: column;
+}
+
+.ourBrandProvides .brandContent div h3 {
+  font-size: 23px;
+  font-family: 'CustomRegular', sans-serif;
+  font-weight: 500;
+  letter-spacing: 1.1px;
+
+}
+
+.ourBrandProvides .brandContent div p {
+  font-size: 16px;
+  letter-spacing: 1.1px;
+  margin-top: 5px;
+
+}
+
+.brandhr1 {
+  width: 100%;
+  background: var(--green);
+  border: 0.5px solid var(--green);
+  outline: none;
+}
+
+.brandhr2 {
+  width: 80%;
+  margin-top: 2px;
+  border: 0.5px solid var(--green);
+  outline: none;
+}
+
+
+@media(max-width:1000px) {
+  .yourFlavor .flavorProducts {
+    width: 96%;
+    place-items: center;
+    gap: 20px;
+  }
+
+  .ourBrandProvides {
+    width: 80%;
+
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    place-items: center;
+
+    gap: 120px;
+    row-gap: 60px;
+  }
+
+
+}
+
+@media(max-width:600px) {
+  .ourBrandProvides {
+    width: 70%;
+  }
+
+
+}
+
+@media(max-width:500px) {
+  .ourBrandProvides {
+    width: 85%;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    row-gap: 30px;
+  }
+
+  .ourBrandProvides .brandContent {
+    gap: 10px;
+  }
+
+  .ourBrandProvides .brandContent img {
+    width: 200px;
+  }
+
+
+
+
+}

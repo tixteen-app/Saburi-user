@@ -1,0 +1,38 @@
+.featuredProducts {
+  /* display: flex;
+  flex-direction: column; */
+  align-items: center;
+  background: linear-gradient(to bottom, #fff 40%, var(--orange) 40%);
+  width: 96%;
+  margin: auto;
+  margin-top: 50px;
+  position: relative;
+  border-radius: 0px 0px 30px 30px;
+  padding-bottom: 60px;
+}
+
+
+.featuredProducts h1 {
+  text-align: center;
+  padding-top: 25px;
+  font-size: 40px;
+  letter-spacing: 1.3px;
+  font-weight: normal;
+}
+
+.products {
+  margin-top: 30px;
+  position: relative;
+}
+
+@media(max-width:500px) {
+
+  .featuredProducts h1 {
+    text-align: center;
+    padding-top: 25px;
+    font-size: 30px;
+    letter-spacing: 1.3px;
+    padding: 0 10px;
+    font-weight: normal;
+  }
+}

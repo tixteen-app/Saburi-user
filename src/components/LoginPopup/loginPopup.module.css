@@ -1,0 +1,281 @@
+.loginPopupContainer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+
+.loginPopup {
+  background-color: white;
+  border-radius: 10px;
+  width: 60%;
+  max-width: 1200px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  position: relative;
+  display: flex;
+  gap: 20px;
+
+}
+
+.leftLoginPopup {
+  display: flex;
+  padding: 40px;
+  width: 70%;
+  flex-direction: column;
+  align-items: center;
+  /* gap: 20px; */
+}
+
+.rightLoginPopup {
+  margin-right: 20px;
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  background: var(--orange);
+}
+
+.innerRightLoginpopup {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: auto 0;
+  justify-content: center;
+  align-items: center;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 0px 40px;
+
+}
+
+.form .phoneNo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.form .phoneNo label {
+  font-size: 19px;
+  letter-spacing: 1.2px;
+}
+
+.form .phoneNo input {
+  border: 0;
+  background: white;
+  font-size: 17px;
+  padding: 8px 6px;
+  width: 100%;
+}
+
+.form button {
+  background: var(--green);
+  font-size: 19px;
+  outline: 0;
+  border: 0;
+  padding: 10px;
+  color: #fff;
+}
+
+.leftLoginPopup ul {
+  display: flex;
+  margin-top: 40px;
+  width: 100%;
+  gap: 20px;
+  justify-content: space-between;
+}
+
+.leftLoginPopup ul img {
+  width: 60px;
+}
+
+.leftLoginPopup ul li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+
+
+.otp {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.otp div {
+  display: flex;
+  gap: 10px;
+}
+
+.otp div input {
+  width: 40px;
+  height: 40px;
+  border: 0;
+  background: #fff;
+  font-size: 18px;
+  text-align: center;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+
+.termsConditions {
+  width: 100%;
+  padding: 10px;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: start;
+  max-width: 400px;
+}
+
+.termsConditions div {
+  margin-left: -10px;
+}
+
+.termsConditions input {
+  margin-top: 4px;
+}
+
+.termsConditions a {
+  border-bottom: 1px solid #000;
+}
+
+.closePopup {
+  position: absolute;
+  background: var(--green);
+  width: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  right: 0%;
+  top: 0px;
+  border-radius: 0% 0 0 50%;
+  color: #fff;
+  cursor: pointer;
+  font-size: 28px;
+}
+
+/* Style for the container holding the Google Sign-In button */
+.google_signin_container {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 16px;
+  color: #4285f4; /* Google blue color */
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+}
+
+.google_signin_container:hover {
+  background-color: #f1f3f4; /* Light grey background on hover */
+  border-radius: 4px;
+}
+
+/* Style for the Google icon */
+.google_icon {
+  margin-right: 8px; /* Space between the icon and text */
+}
+
+/* Style for the image inside the Google icon */
+.google_icon_img {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+
+
+@media(max-width:1200px) {
+  .loginPopup {
+    width: 90%;
+  }
+
+}
+
+@media(max-width:900px) {
+  .loginPopup {
+    width: 96%;
+    padding: 40px 0;
+    box-shadow: 0;
+    background: transparent;
+  }
+
+  .leftLoginPopup {
+    display: none;
+    padding: 20px;
+
+  }
+
+  .rightLoginPopup {
+    /* margin: px; */
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    margin: auto;
+    justify-content: center;
+    background: var(--orange);
+    border-radius: 20px;
+    width: 70%;
+  }
+
+  .innerRightLoginpopup {
+    margin: 20px;
+  }
+
+  .closePopup {
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+  }
+}
+
+@media(max-width:500px) {
+  .form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 0px;
+
+  }
+
+  .loginPopup {
+    width: 96%;
+    padding: 32px 0;
+    box-shadow: 0;
+    background: transparent;
+  }
+
+  .innerRightLoginpopup {
+    margin: 20px 0;
+  }
+
+  .termsConditions {
+    width: 100%;
+    padding: 5px 0;
+
+  }
+  .rightLoginPopup {
+    width: 85%;
+  }
+
+  .termsConditions input {}
+
+}

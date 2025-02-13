@@ -1,0 +1,290 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  margin: auto;
+  margin-top: 30px;
+
+}
+
+.cartHeading {
+  font-size: 2.3rem;
+  font-weight: 300;
+  letter-spacing: 1.2px;
+}
+
+.cartContainer {
+  display: flex;
+  align-items: center;
+  margin-top: 0px;
+  justify-content: space-between;
+  gap: 20px;
+
+}
+
+
+.cartList {
+  margin-top: -10px;
+}
+
+
+.cartGrid {
+  position: relative;
+  display: grid;
+  grid-template-columns: 2fr 1.5fr 1.5fr;
+  align-items: center;
+  justify-content: center;
+  gap: 120px;
+  margin: auto;
+  padding-left: 60px;
+  margin-left: 20px;
+  padding-right: 40px;
+}
+
+.cartGrid1 p {}
+
+.cartGrid2 {
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+  margin-bottom: 40px;
+  font-family: 'CustomRegular', sans-serif;
+}
+
+.cartGrid p {
+  padding: 26px;
+}
+
+.removeCart {
+  position: absolute;
+  right: 0;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* transform: rotate(90deg); */
+  font-weight: 600;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.removeCartButton {
+  position: absolute;
+}
+
+.cartGrid p, .cartGrid img {
+  margin: auto;
+
+}
+
+.cartGrid img {
+  width: 70px;
+  position: absolute;
+  left: -0.5rem;
+}
+
+.proceedCheckout {
+  display: flex;
+  margin: auto;
+  width: 90%;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+  background: var(--orange);
+  border: 0;
+}
+
+.proceedCheckout button {
+  border: 1.5px solid #fff;
+  background: var(--orange);
+  padding: 15px 10px;
+  width: 100%;
+  font-size: 15px;
+  cursor: pointer;
+
+}
+
+
+.confirmationDialog {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.dialogContent {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  width: 400px;
+  max-width: 90%;
+ 
+}
+
+.dialogContent h2 {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.dialogContent p {
+  margin-bottom: 20px;
+}
+.confirmButton, .cancelButton {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+.dialogButtons_both{
+  display: flex;
+  justify-content: center;
+}
+
+.confirmButton {
+  background-color: #1eff00;
+  color: #fff;
+  margin-right: 10px;
+}
+
+.confirmButton:hover {
+  background-color: #2c911ea0;
+}
+
+.cancelButton {
+  background-color: #ddd;
+}
+
+.cancelButton:hover {
+  background-color: #ccc;
+}
+
+
+
+
+
+
+
+
+/* ============rightCart================== */
+
+.rightCart {
+  width: 100%;
+  max-width: 550px;
+  display: flex;
+  border-radius: 20px;
+  flex-direction: column;
+  /* border: 1px solid rgba(0, 0, 0, 0.5); */
+  gap: 0px;
+}
+
+.proceedCheckout2 {
+  display: none;
+}
+
+.proceedCheckout1 {
+  display: block;
+}
+
+.quantityDesktop {
+  display: black;
+}
+
+.quantityMobile {
+  display: none;
+}
+
+@media(max-width:1250px) {
+  .container {
+    width: 96%;
+  }
+
+  .cartGrid {
+    grid-template-columns: 1.5fr 1fr 1fr;
+    gap: 0px;
+  }
+
+  .cartGrid1 span {
+    display: none;
+  }
+
+  .cartGrid p {
+    padding: 20px;
+  }
+
+}
+
+
+@media(max-width:800px) {
+  .cartContainer {
+    display: flex;
+    align-items: center;
+    margin-top: 0px;
+    justify-content: space-between;
+    flex-direction: column;
+    gap: 20px;
+
+  }
+
+  .proceedCheckout2 {
+    display: block;
+    max-width: 450px;
+  }
+
+  .proceedCheckout1 {
+    display: none;
+  }
+}
+
+@media(max-width:500px) {
+  .cartHeading {
+    font-size: 32px;
+  }
+
+  .cartContainer {
+    gap: 0px;
+  }
+
+  .cartList {
+    margin-top: 6px;
+  }
+
+  .cartGrid {
+
+    grid-template-columns: 1fr 0.7fr 0.7fr;
+
+    padding-left: 50px;
+    margin-left: 5px;
+    padding-right: 45px;
+  }
+
+  .quantityDesktop {
+    display: none;
+  }
+
+  .quantityMobile {
+    display: block;
+    text-align: left;
+  }
+
+  .cartGrid p {
+    padding: 18px;
+    font-size: 14px;
+  }
+
+  .cartGrid img {
+    width: 60px;
+    position: absolute;
+    left: -0.5rem;
+  }
+
+  .rightCart {
+    padding: 20px 12px;
+  }
+}

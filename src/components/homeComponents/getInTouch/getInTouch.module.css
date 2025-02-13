@@ -1,0 +1,150 @@
+.container {
+  display: flex;
+  align-items: center;
+  width: 80%;
+  margin: auto;
+  margin-top: 120px;
+  justify-content: space-between;
+}
+
+/* src/components/ContactForm.module.css */
+.formContainer {
+  background-color: var(--orange);
+  padding: 30px;
+  border-radius: 15px;
+  max-width: 500px;
+  width: 600px;
+  /* margin: 0 auto; */
+}
+
+h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  max-width: 500px;
+}
+
+.inputGroup {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: px;
+}
+
+.inputField {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.label {
+  margin-bottom: 5px;
+  font-size: 14px;
+}
+
+.input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  height: 100px;
+}
+
+.button {
+  background-color: #000;
+  color: #fff;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.button:hover {
+  background-color: #333;
+}
+
+.reachtous {
+  margin: auto;
+  font-size: 40px;
+  font-weight: normal;
+  letter-spacing: 2px;
+}
+
+@media(max-width:1000px) {
+  .container {
+    width: 90%;
+    margin-top: 120px;
+  }
+}
+
+@media(max-width:850px) {
+
+
+  .container {
+    display: flex;
+    align-items: center;
+    width: 90%;
+
+    margin: 0;
+
+    justify-content: center;
+    margin: auto;
+    flex-direction: column-reverse;
+    margin-top: 80px;
+    gap: 20px;
+  }
+
+  .reachtous {}
+
+  .inputField {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+@media(max-width:550px) {
+  .formContainer {
+    background-color: var(--orange);
+    padding: 30px;
+    border-radius: 15px;
+    max-width: 400px;
+    width: 600px;
+    /* margin: 0 auto; */
+  }
+}
+
+@media(max-width:430px) {
+  .formContainer {
+    background-color: var(--orange);
+    padding: 30px 20px;
+    border-radius: 15px;
+    max-width: 370px;
+    width: 600px;
+    /* margin: 0 auto; */
+  }
+}
+
+@media(max-width:400px) {
+  .formContainer {
+    background-color: var(--orange);
+    padding: 30px 20px;
+    border-radius: 15px;
+    max-width: 340px;
+    width: 600px;
+    /* margin: 0 auto; */
+  }
+}

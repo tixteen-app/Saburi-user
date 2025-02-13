@@ -1,0 +1,38 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+@font-face {
+  font-family: 'CustomLight';
+  src: url('./assets/fonts/light.otf') format('opentype');
+}
+
+@font-face {
+  font-family: 'CustomRegular';
+  src: url('./assets/fonts/regular.otf') format('opentype');
+}
+
+@font-face {
+  font-family: 'CustomThin';
+  src: url('./assets/fonts/thin.otf') format('opentype');
+}
+
+body {
+  font-family: 'CustomLight', sans-serif;
+}
+
+:root {
+  --green: #009241;
+  --orange: #F8E4CB;
+  --secondary-color: #ff5722;
+  --font-size-base: 16px;
+}
