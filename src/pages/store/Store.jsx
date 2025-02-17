@@ -164,8 +164,11 @@ const Store = () => {
                         </div>
                 <div className={styles.bottomContainer}>
                     <aside className={styles.sidebar}>
-                        <h2>
+                        {/* <h2>
                             BEST SELLING PRODUCTS <span>&#8594;</span>
+                        </h2> */}
+                        <h2>
+                            Categories <span> &#8594;</span>
                         </h2>
                         <ul>
                             {categories.map((category) => (

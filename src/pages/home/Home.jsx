@@ -1,6 +1,7 @@
 import React from "react"
 import LandingPage from "../../components/landingPage/LandingPage"
 import styles from "./home.module.css"
+import {Link} from "react-router-dom"
 import { flavorsOfChai, ourBrands } from "../../assets/assets"
 import FeaturedProducts from "../../components/homeComponents/featuredProducts/FeaturedProducts"
 import HomeGrid from "../../components/homeComponents/grid/HomeGrid"
@@ -18,15 +19,18 @@ const Home = () => {
 				<h1>Find Your Flavor</h1>
 				<div className={styles.flavorProducts}>
 					{flavorsOfChai.map((item) => (
-						<div key={item.name}>
-							<img
-								src={item?.img}
-								alt={item?.name}
-							/>
-							<p>{item?.name}</p>
-						</div>
+						<Link to={`/store`} >
+							<div key={item.name}>
+								<img
+									src={item?.img}
+									alt={item?.name}
+								/>
+								<p>{item?.name}</p>
+							</div>
+						</Link>
 					))}
 				</div>
+				
 			</div>
 			<div className={styles.ourBrands}>
 				<h1>Discover Our Brand</h1>
