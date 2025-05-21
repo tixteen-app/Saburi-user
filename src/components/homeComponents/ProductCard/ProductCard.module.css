@@ -58,6 +58,13 @@
 
 
 }
+.quantityLoader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+}
 
 .addButton {
   background-color: var(--green);
@@ -160,3 +167,4 @@
 .productSize_dropdonw_all_products:focus {
   outline: none;
 }
+

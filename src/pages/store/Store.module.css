@@ -10,7 +10,16 @@
 .priceFilterButtons_for_mobile {
   display: none;
 }
-
+.noProductsContainer{
+  text-align: center;
+}
+.loaderContainer{
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 50vh;
+}
 .topContainer {
   border-bottom: 1px solid #000;
   display: flex;

@@ -10,14 +10,16 @@ import PrimaryLoader from "../../utils/loaders/PrimaryLoader";
 import { useLocation } from "react-router-dom";
 import Catelog from "../../assets/E-catelog/SABURI CHAI CATALOUGE 2024.pdf"
 
+
+
 const Store = () => {
     const navigate = useNavigate();
     const location = useLocation();
-    const [products, setProducts] = useState([]);
-    const [filteredProducts, setFilteredProducts] = useState([]);
+    const [products, setProducts] = useState(null);
+    const [filteredProducts, setFilteredProducts] = useState();
     const [categories, setCategories] = useState([]);
     const [selectedCategory, setSelectedCategory] = useState({
-        value: "", // Set to empty string to represent "All"
+        value: "",
         label: "All",
     });
     const [category, setCategory] = useState(""); // Also set to empty string
@@ -71,26 +73,47 @@ const Store = () => {
         fetchCategories();
     }, []);
 
-    const fetchProduct = async () => {
-        setLoading(true)
-        try {
-            const response = await makeApi(
-                `/api/get-all-products?name=${search}&category=${category}&minPrice=${minPrice}&maxPrice=${maxPrice}&IsOutOfStock=false&perPage=30&page=${currentPage}`,
-                "GET"
-            );
-            setProducts(response.data.products);
-            setFilteredProducts(response.data.products);
-            const total = response.data.totalProducts;
+    // const fetchProduct = async () => {
+    //     setLoading(true)
+    //     try {
+    //         const response = await makeApi(
+    //             `/api/get-all-products?name=${search}&category=${category}&minPrice=${minPrice}&maxPrice=${maxPrice}&IsOutOfStock=false&perPage=30&page=${currentPage}`,
+    //             "GET"
+    //         );
+    //         setProducts(response.data.products);
+    //         setFilteredProducts(response.data.products);
+    //         const total = response.data.totalProducts;
 
-            setTotalPages(Math.ceil(total / 30));
-        } catch (error) {
-            console.log(error);
-        } finally {
-            setLoading(false)
-        }
-    };
+    //         setTotalPages(Math.ceil(total / 30));
+    //     } catch (error) {
+    //         console.log(error);
+    //     } finally {
+    //         setLoading(false)
+    //     }
+    // };
+
+   const fetchProduct = async () => {
+  setLoading(true);
+  try {
+    const response = await makeApi(
+      `/api/get-all-products?name=${search}&category=${category}&minPrice=${minPrice}&maxPrice=${maxPrice}&IsOutOfStock=false&perPage=30&page=${currentPage}`,
+      "GET"
+    );
+    const fetchedProducts = response.data.products;
+    setProducts(fetchedProducts);
+    setFilteredProducts(fetchedProducts);
+    setTotalPages(Math.ceil(response.data.totalProducts / 30));
+  } catch (error) {
+    console.log(error);
+    setProducts([]);
+    setFilteredProducts([]);
+  } finally {
+    setLoading(false);
+  }
+};
 
     useEffect(() => {
+        
         fetchProduct();
     }, [search, category, minPrice, maxPrice, currentPage]);
 
@@ -100,18 +123,24 @@ const Store = () => {
         filterProducts(selectedOption.value);
     };
 
+ 
     const filterProducts = (selectedCategory) => {
-        let filtered = products.filter(
-            (product) =>
-                product.discountedPrice >= minPrice &&
+        try {
+            setLoading(true);
+            let filtered = [...products].filter(
+                (product) =>
+                    product.discountedPrice >= minPrice &&
                 product.discountedPrice <= maxPrice
-        );
-
-        if (selectedCategory !== "") {
-            filtered = filtered.filter((product) => product.category._id === selectedCategory);
+            );
+            if (selectedCategory !== "") {
+                filtered = filtered.filter((product) => product.category._id === selectedCategory);
+            }
+            setFilteredProducts(filtered);
+        }catch (error) {
+            console.log(error);
+        }finally {
+            setLoading(false);
         }
-
-        setFilteredProducts(filtered);
     };
 
     const handlePriceRangeChange = (min, max) => {
@@ -122,7 +151,7 @@ const Store = () => {
 
     const handleProductClick = (product) => {
         navigate(`/store/${product._id}`);
-    }; 
+    };
 
     return (
         <div>
@@ -145,23 +174,23 @@ const Store = () => {
                     />
                 </div>
                 <div className={styles.priceFilterButtonsforMobile}>
-                            <div className={`${styles.pricefilteroptions} ${minPrice === 0 && maxPrice === 500 ? styles.selectedPrice : ''}`} onClick={() => handlePriceRangeChange(0, 500)}> ₹0 - ₹500</div>
-                            <div className={`${styles.pricefilteroptions} ${minPrice === 500 && maxPrice === 1000 ? styles.selectedPrice : ''}`} onClick={() => handlePriceRangeChange(500, 1000)}>₹500 - ₹1000</div>
-                            <div className={`${styles.pricefilteroptions} ${minPrice === 1000 && maxPrice === 1500 ? styles.selectedPrice : ''}`} onClick={() => handlePriceRangeChange(1000, 1500)}>₹1000 - ₹1500</div>
-                            <div className={`${styles.pricefilteroptions} ${minPrice === 1500 ? styles.selectedPrice : ''}`} onClick={() => handlePriceRangeChange(1500, 20000)}>₹1500 +</div>
+                    <div className={`${styles.pricefilteroptions} ${minPrice === 0 && maxPrice === 500 ? styles.selectedPrice : ''}`} onClick={() => handlePriceRangeChange(0, 500)}> ₹0 - ₹500</div>
+                    <div className={`${styles.pricefilteroptions} ${minPrice === 500 && maxPrice === 1000 ? styles.selectedPrice : ''}`} onClick={() => handlePriceRangeChange(500, 1000)}>₹500 - ₹1000</div>
+                    <div className={`${styles.pricefilteroptions} ${minPrice === 1000 && maxPrice === 1500 ? styles.selectedPrice : ''}`} onClick={() => handlePriceRangeChange(1000, 1500)}>₹1000 - ₹1500</div>
+                    <div className={`${styles.pricefilteroptions} ${minPrice === 1500 ? styles.selectedPrice : ''}`} onClick={() => handlePriceRangeChange(1500, 20000)}>₹1500 +</div>
 
-                            {/* Remove Price Filter Button */}
-                            <button
-                                className={styles.removePriceFilter}
-                                onClick={() => {
-                                    setMinPrice(0);
-                                    setMaxPrice(2000000);
-                                    filterProducts(category);
-                                }}
-                            >
-                                Remove Price Filter
-                            </button>
-                        </div>
+                    {/* Remove Price Filter Button */}
+                    <button
+                        className={styles.removePriceFilter}
+                        onClick={() => {
+                            setMinPrice(0);
+                            setMaxPrice(2000000);
+                            filterProducts(category);
+                        }}
+                    >
+                        Remove Price Filter
+                    </button>
+                </div>
                 <div className={styles.bottomContainer}>
                     <aside className={styles.sidebar}>
                         {/* <h2>
@@ -209,83 +238,61 @@ const Store = () => {
 
                     </aside>
                     <main className={styles.main}>
-                        {loading ? (
-                            <div style={{ width: "100%", height: "30vh", display: "flex", justifyContent: "center", alignItems: "center" }}>
+                        {products === null ? ( 
+                            <div className={styles.loaderContainer}>
                                 <PrimaryLoader />
                             </div>
+                        ) : filteredProducts && filteredProducts.length === 0 ? (
+                            <div className={styles.noProductsContainer}>
+                                <img
+                                    src="https://thecafetable.com/assets/images/no-product.png?v=3"
+                                    alt="No Products"
+                                    className={styles.noProductsImage}
+                                />
+                            </div>
                         ) : (
-                            <>
-                                {filteredProducts.length === 0 && <div style={{ width: "100%", display: "flex", justifyContent: "center", alignItems: "center" }} >
-                                    <img src="https://thecafetable.com/assets/images/no-product.png?v=3" style={{ width: "50%", objectFit: "contain", padding: "10px" }} alt="No Products" />
-                                </div>}
-                                <section className={styles.productsGrid}>
-                                    {filteredProducts.map((product) => (
-                                        <ProductCard key={product._id} product={product} onClick={() => handleProductClick(product)} />
-                                    ))}
-                                </section>
-                            </>
+                            <section className={styles.productsGrid}>
+                                {filteredProducts?.map((product) => (
+                                    <ProductCard
+                                        key={product._id}
+                                        product={product}
+                                        onClick={() => navigate(`/store/${product._id}`)}
+                                    />
+                                ))}
+                            </section>
                         )}
                     </main>
                 </div>
             </div>
-            {/* Pagination */}
-            {/* <div className={styles.all_user_pagination_main_div}>
-                <div className={styles.all_user_pagination}>
-                    {startPage > 1 && (
-                        <>
-                            <button onClick={() => handlePageClick(1)}>&laquo;</button>
-                            <span>...</span>
-                        </>
-                    )}
-                    {Array.from({ length: endPage - startPage + 1 }, (_, index) => startPage + index).map(
-                        (pageNumber) => (
-                            <button
-                                key={pageNumber}
-                                className={pageNumber === currentPage ? styles.activepagination : styles.nonactivepagination}
-                                onClick={() => handlePageClick(pageNumber)}
-                            >
-                                {pageNumber}
-                            </button>
-                        )
-                    )}
-                    {endPage < totalPages && (
-                        <>
-                            <span>...</span>
-                            <button onClick={() => handlePageClick(totalPages)}>&raquo;</button>
-                        </>
-                    )}
+            {totalPages > 1 && (
+                <div className={styles.all_user_pagination_main_div}>
+                    <div className={styles.all_user_pagination}>
+                        {startPage > 1 && (
+                            <>
+                                <button onClick={() => handlePageClick(1)}>&laquo;</button>
+                                <span>...</span>
+                            </>
+                        )}
+                        {Array.from({ length: endPage - startPage + 1 }, (_, index) => startPage + index).map(
+                            (pageNumber) => (
+                                <button
+                                    key={pageNumber}
+                                    className={pageNumber === currentPage ? styles.activepagination : styles.nonactivepagination}
+                                    onClick={() => handlePageClick(pageNumber)}
+                                >
+                                    {pageNumber}
+                                </button>
+                            )
+                        )}
+                        {endPage < totalPages && (
+                            <>
+                                <span>...</span>
+                                <button onClick={() => handlePageClick(totalPages)}>&raquo;</button>
+                            </>
+                        )}
+                    </div>
                 </div>
-            </div> */}
-            {/* Pagination */}
-{totalPages > 1 && (
-    <div className={styles.all_user_pagination_main_div}>
-        <div className={styles.all_user_pagination}>
-            {startPage > 1 && (
-                <>
-                    <button onClick={() => handlePageClick(1)}>&laquo;</button>
-                    <span>...</span>
-                </>
             )}
-            {Array.from({ length: endPage - startPage + 1 }, (_, index) => startPage + index).map(
-                (pageNumber) => (
-                    <button
-                        key={pageNumber}
-                        className={pageNumber === currentPage ? styles.activepagination : styles.nonactivepagination}
-                        onClick={() => handlePageClick(pageNumber)}
-                    >
-                        {pageNumber}
-                    </button>
-                )
-            )}
-            {endPage < totalPages && (
-                <>
-                    <span>...</span>
-                    <button onClick={() => handlePageClick(totalPages)}>&raquo;</button>
-                </>
-            )}
-        </div>
-    </div>
-)}
 
         </div>
     );

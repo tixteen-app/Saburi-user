@@ -17,31 +17,41 @@ export const fetchWishlist = async (setWishlistItems) => {
   }
 };
 
-export const fetchCart = async (setCartItems,setCompleteCart,setFetchCartLoader ) => {
+export const fetchCart = async (setCartItems, setCompleteCart, setFetchCartLoader) => {
   setFetchCartLoader(true);
   try {
     const response = await makeApi("/api/my-cart", "GET");
 
+    // Check if response.data exists and has orderItems
+    if (!response?.data) {
+      console.error("No data in response");
+      return;
+    }
 
-    // set cart id in cookie
-    Cookies.set("cartId", response.data._id , { expires: 2 });
-    Cookies.set("cardItem" ,JSON.stringify(response.data), { expires: 2 });
+    // Set cart id in cookie if it exists
+    if (response.data._id) {
+      Cookies.set("cartId", response.data._id, { expires: 2 });
+      Cookies.set("cardItem", JSON.stringify(response.data), { expires: 2 });
+    }
 
-
-    const cartItems = response.data.orderItems.map(item => ({
-      productId: item.productId._id,
-      quantity: item.quantity,
-      size: item.size._id,
+    // Safely handle orderItems (default to empty array if not present)
+    const orderItems = response.data.orderItems || [];
+    const cartItems = orderItems.map(item => ({
+      productId: item?.productId?._id,
+      quantity: item?.quantity,
+      size: item?.size?._id,
     }));
     
-      setCartItems(cartItems);
-      if(setCompleteCart){
-        setCompleteCart(response.data);
-      }
+    setCartItems(cartItems);
+    
+    if (setCompleteCart) {
+      setCompleteCart(response.data);
+    }
+    
     updateCartCount(cartItems);
   } catch (error) {
-    console.log(error);
-  }finally {
+    console.error("Error fetching cart:", error);
+  } finally {
     setFetchCartLoader(false);  
   }
 };

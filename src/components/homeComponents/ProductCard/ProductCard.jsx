@@ -18,30 +18,15 @@ const ProductCard = ({ product, onClick }) => {
     const [cartQuantity, setCartQuantity] = useState(0);
     const [isLogin, setIsLogin] = useState(false);
     const [showPopup, setShowPopup] = useState(false);
-    const [productLoaders, setProductLoaders] = useState({});
+    const [productLoaders, setProductLoaders] = useState({});   
     const [cartItems, setCartItems] = useState([]);
     const [fetchCartLoader, setFetchCartLoader] = useState(false);
 
-    // Automatically select the first size
-    // useEffect(() => {
-    //     if (product?.size?.length > 0) {
-    //         setSize(product.size);
-    //         const defaultSize = product.size[0];
-    //         setSelectedSize(defaultSize._id);
-    //         setFilterData(defaultSize);
-    //     }
-    //     const token = localStorage.getItem('token');
-    //     const cookiesData = Cookies.get('register');
-    //     setIsLogin(token);
-    // }, [product]);
     useEffect(() => {
         if (product?.size?.length > 0) {
             setSize(product.size);
     
-            // Find a size that is in stock
             const inStockSize = product.size.find(size => size.IsOutOfStock === "false");
-    
-            // If no size is in stock, set the first size as default
             const defaultSize = inStockSize || product.size[0];
             
             setSelectedSize(defaultSize._id);
@@ -165,69 +150,129 @@ const ProductCard = ({ product, onClick }) => {
         setShowPopup(false);
     };
 
-    return (
+    // return (
+    //     <div className={styles.card}>
+    //         {showPopup && <LoginPopup setLoginPopup={closePopup} />}
+    //         <ToastContainer />
+
+    //         {fetchCartLoader ? (
+    //             <div className={styles.fetchCartLoad_all_products}  >
+    //                 <PrimaryLoader />
+    //             </div>
+    //         ) : (
+    //             <>
+    //                 <LazyLoadImage
+    //                 effect="blur" loading="lazy"
+    //                     src={product?.thumbnail}
+    //                     alt={product?.name}
+    //                     className={styles.image}
+    //                     onClick={onClick}
+    //                 />
+    //                 <div className={styles.info}>
+    //                     <div className={`${styles.productName} ${styles.productSizeDropdown}`}>
+    //                         <div>
+    //                             Rs {filterData?.FinalPrice}{" "}
+    //                             <span className={styles.originalPrice_at_allprodocut}>Rs {filterData?.price}</span>
+    //                         </div>
+    //                         <div>
+    //                             <select onChange={handleSelectedSize} value={selectedSize} className={styles.productSize_dropdonw_all_products} >
+    //                                 {size?.map((item, index) => (
+    //                                     <option key={index} value={item._id}>
+    //                                         {item.size} {item.sizetype} 
+    //                                     </option>
+    //                                 ))}
+                                    
+    //                             </select>
+    //                         </div>
+    //                     </div>
+
+    //                     <div className={styles.buttonPrice} style={{ padding: "0px 10px" }} >
+    //                         <div style={{ marginLeft: "2px" }}>
+    //                             <h3 onClick={onClick}>{product?.name}</h3>
+    //                         </div>
+    //                         {isInCart ? (
+    //                             <div className={styles.cartControls_for_all_products}  >
+    //                                 <button disabled={productLoaders[selectedSize]} onClick={handleDecreaseQuantity}>
+    //                                     -
+    //                                 </button>
+    //                                 <span>{cartQuantity}</span>
+    //                                 <button disabled={productLoaders[selectedSize]} onClick={handleIncreaseQuantity}>
+    //                                     +
+    //                                 </button>
+    //                             </div>
+    //                         ) : (
+    //                             <button
+    //                                 className={styles.addButton}
+    //                                 onClick={handleAddToCart}
+    //                                 disabled={productLoaders[selectedSize]}
+    //                             >
+    //                                 {productLoaders[selectedSize] ? 'Adding...' : 'Add to Cart'}
+    //                             </button>
+    //                         )}
+    //                     </div>
+    //                 </div>
+    //             </>
+    //         )}
+    //     </div>
+    // );
+      return (
         <div className={styles.card}>
             {showPopup && <LoginPopup setLoginPopup={closePopup} />}
             <ToastContainer />
 
-            {fetchCartLoader ? (
-                <div className={styles.fetchCartLoad_all_products}  >
-                    <PrimaryLoader />
-                </div>
-            ) : (
-                <>
-                    <LazyLoadImage
-                    effect="blur" loading="lazy"
-                        src={product?.thumbnail}
-                        alt={product?.name}
-                        className={styles.image}
-                        onClick={onClick}
-                    />
-                    <div className={styles.info}>
-                        <div className={`${styles.productName} ${styles.productSizeDropdown}`}>
-                            <div>
-                                Rs {filterData?.FinalPrice}{" "}
-                                <span className={styles.originalPrice_at_allprodocut}>Rs {filterData?.price}</span>
-                            </div>
-                            <div>
-                                <select onChange={handleSelectedSize} value={selectedSize} className={styles.productSize_dropdonw_all_products} >
-                                    {size?.map((item, index) => (
-                                        <option key={index} value={item._id}>
-                                            {item.size} {item.sizetype} 
-                                        </option>
-                                    ))}
-                                    
-                                </select>
-                            </div>
-                        </div>
-
-                        <div className={styles.buttonPrice} style={{ padding: "0px 10px" }} >
-                            <div style={{ marginLeft: "2px" }}>
-                                <h3 onClick={onClick}>{product?.name}</h3>
-                            </div>
-                            {isInCart ? (
-                                <div className={styles.cartControls_for_all_products}  >
-                                    <button disabled={productLoaders[selectedSize]} onClick={handleDecreaseQuantity}>
-                                        -
-                                    </button>
-                                    <span>{cartQuantity}</span>
-                                    <button disabled={productLoaders[selectedSize]} onClick={handleIncreaseQuantity}>
-                                        +
-                                    </button>
-                                </div>
-                            ) : (
-                                <button
-                                    className={styles.addButton}
-                                    onClick={handleAddToCart}
-                                    disabled={productLoaders[selectedSize]}
-                                >
-                                    {productLoaders[selectedSize] ? 'Adding...' : 'Add to Cart'}
-                                </button>
-                            )}
-                        </div>
+            <LazyLoadImage
+                effect="blur" loading="lazy"
+                src={product?.thumbnail}
+                alt={product?.name}
+                className={styles.image}
+                onClick={onClick}
+            />
+            <div className={styles.info}>
+                <div className={`${styles.productName} ${styles.productSizeDropdown}`}>
+                    <div>
+                        Rs {filterData?.FinalPrice}{" "}
+                        <span className={styles.originalPrice_at_allprodocut}>Rs {filterData?.price}</span>
                     </div>
-                </>
-            )}
+                    <div>
+                        <select onChange={handleSelectedSize} value={selectedSize} className={styles.productSize_dropdonw_all_products}>
+                            {size?.map((item, index) => (
+                                <option key={index} value={item._id}>
+                                    {item.size} {item.sizetype}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
+                </div>
+
+                <div className={styles.buttonPrice} style={{ padding: "0px 10px" }}>
+                    <div style={{ marginLeft: "2px" }}>
+                        <h3 onClick={onClick}>{product?.name}</h3>
+                    </div>
+                    {productLoaders[product._id] ? (
+                        <div className={styles.quantityLoaderContainer}>
+                            <PrimaryLoader />
+                        </div>
+                    ) : isInCart ? (
+                        <div className={styles.cartControls_for_all_products}>
+                            <button disabled={productLoaders[product._id]} onClick={handleDecreaseQuantity}>
+                                -
+                            </button>
+                            <span>{cartQuantity}</span>
+                            <button disabled={productLoaders[product._id]} onClick={handleIncreaseQuantity}>
+                                +
+                            </button>
+                        </div>
+                    ) : (
+                        <button
+                            className={styles.addButton}
+                            onClick={handleAddToCart}
+                            disabled={productLoaders[product._id]}
+                        >
+                            {productLoaders[product._id] ? 'Adding...' : 'Add to Cart'}
+                        </button>
+                    )}
+                </div>
+            </div>
         </div>
     );
 };

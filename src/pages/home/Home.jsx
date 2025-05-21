@@ -10,6 +10,7 @@ import WhoWeAre from "../../components/homeComponents/whoWeAre/WhoWeAre"
 import GetInTouch from "../../components/homeComponents/getInTouch/GetInTouch"
 import TeaTales from "../../components/homeComponents/teaTales/TeaTales"
 import Marquee from "../../components/homeComponents/marquee/Marquee"
+import {motion} from "framer-motion"
 
 const Home = () => {
 	return (
