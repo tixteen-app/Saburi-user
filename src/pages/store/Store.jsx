@@ -73,47 +73,29 @@ const Store = () => {
         fetchCategories();
     }, []);
 
-    // const fetchProduct = async () => {
-    //     setLoading(true)
-    //     try {
-    //         const response = await makeApi(
-    //             `/api/get-all-products?name=${search}&category=${category}&minPrice=${minPrice}&maxPrice=${maxPrice}&IsOutOfStock=false&perPage=30&page=${currentPage}`,
-    //             "GET"
-    //         );
-    //         setProducts(response.data.products);
-    //         setFilteredProducts(response.data.products);
-    //         const total = response.data.totalProducts;
 
-    //         setTotalPages(Math.ceil(total / 30));
-    //     } catch (error) {
-    //         console.log(error);
-    //     } finally {
-    //         setLoading(false)
-    //     }
-    // };
-
-   const fetchProduct = async () => {
-  setLoading(true);
-  try {
-    const response = await makeApi(
-      `/api/get-all-products?name=${search}&category=${category}&minPrice=${minPrice}&maxPrice=${maxPrice}&IsOutOfStock=false&perPage=30&page=${currentPage}`,
-      "GET"
-    );
-    const fetchedProducts = response.data.products;
-    setProducts(fetchedProducts);
-    setFilteredProducts(fetchedProducts);
-    setTotalPages(Math.ceil(response.data.totalProducts / 30));
-  } catch (error) {
-    console.log(error);
-    setProducts([]);
-    setFilteredProducts([]);
-  } finally {
-    setLoading(false);
-  }
-};
+    const fetchProduct = async () => {
+        setLoading(true);
+        try {
+            const response = await makeApi(
+                `/api/get-all-products?name=${search}&category=${category}&minPrice=${minPrice}&maxPrice=${maxPrice}&IsOutOfStock=false&perPage=30&page=${currentPage}`,
+                "GET"
+            );
+            const fetchedProducts = response.data.products;
+            setProducts(fetchedProducts);
+            setFilteredProducts(fetchedProducts);
+            setTotalPages(Math.ceil(response.data.totalProducts / 30));
+        } catch (error) {
+            console.log(error);
+            setProducts([]);
+            setFilteredProducts([]);
+        } finally {
+            setLoading(false);
+        }
+    };
 
     useEffect(() => {
-        
+
         fetchProduct();
     }, [search, category, minPrice, maxPrice, currentPage]);
 
@@ -123,22 +105,22 @@ const Store = () => {
         filterProducts(selectedOption.value);
     };
 
- 
+
     const filterProducts = (selectedCategory) => {
         try {
             setLoading(true);
             let filtered = [...products].filter(
                 (product) =>
                     product.discountedPrice >= minPrice &&
-                product.discountedPrice <= maxPrice
+                    product.discountedPrice <= maxPrice
             );
             if (selectedCategory !== "") {
                 filtered = filtered.filter((product) => product.category._id === selectedCategory);
             }
             setFilteredProducts(filtered);
-        }catch (error) {
+        } catch (error) {
             console.log(error);
-        }finally {
+        } finally {
             setLoading(false);
         }
     };
@@ -211,12 +193,6 @@ const Store = () => {
                             ))}
                         </ul>
                         <h3>Price Filter</h3>
-                        {/* <div className={styles.priceFilterButtons}>
-                            <div className={`${styles.pricefilteroptions} ${minPrice === 0 && maxPrice === 500 ? styles.selectedPrice : ''}`} onClick={() => handlePriceRangeChange(0, 500)}> ₹0 - ₹500</div>
-                            <div className={`${styles.pricefilteroptions} ${minPrice === 500 && maxPrice === 1000 ? styles.selectedPrice : ''}`} onClick={() => handlePriceRangeChange(500, 1000)}>₹500 - ₹1000</div>
-                            <div className={`${styles.pricefilteroptions} ${minPrice === 1000 && maxPrice === 1500 ? styles.selectedPrice : ''}`} onClick={() => handlePriceRangeChange(1000, 1500)}>₹1000 - ₹1500</div>
-                            <div className={`${styles.pricefilteroptions} ${minPrice === 1500 ? styles.selectedPrice : ''}`} onClick={() => handlePriceRangeChange(1500, 20000)}>₹1500 +</div>
-                        </div> */}
                         <div className={styles.priceFilterButtons}>
                             <div className={`${styles.pricefilteroptions} ${minPrice === 0 && maxPrice === 500 ? styles.selectedPrice : ''}`} onClick={() => handlePriceRangeChange(0, 500)}> ₹0 - ₹500</div>
                             <div className={`${styles.pricefilteroptions} ${minPrice === 500 && maxPrice === 1000 ? styles.selectedPrice : ''}`} onClick={() => handlePriceRangeChange(500, 1000)}>₹500 - ₹1000</div>
@@ -238,7 +214,7 @@ const Store = () => {
 
                     </aside>
                     <main className={styles.main}>
-                        {products === null ? ( 
+                        {products === null ? (
                             <div className={styles.loaderContainer}>
                                 <PrimaryLoader />
                             </div>
