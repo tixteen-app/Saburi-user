@@ -17,9 +17,8 @@ export const makeApi = async (
 		}
 		const config: AxiosRequestConfig = {
 			method,
-			url: `http://localhost:5010${endpoint}`,
-			// url: `https://saburi-backend.onrender.com${endpoint}`,
-			// url: `https://saburi.ritaz.in${endpoint}`,
+			// url: `http://localhost:5010${endpoint}`,
+			url: `https://saburi.ritaz.in${endpoint}`,
 			headers,
 			data,
 		}
