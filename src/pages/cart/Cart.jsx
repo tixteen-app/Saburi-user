@@ -136,14 +136,11 @@
 // export default Cart;
 
 import { Link, useNavigate } from "react-router-dom";
-import { assets, cartList } from "../../assets/assets";
-import CartList from "../../components/cartList/CartList";
 import styles from "./cart.module.css";
 import { AiOutlineDelete } from "react-icons/ai";
 import { addToCart, removeFromCart, fetchCart, deleteproductFromCart } from '../../utils/productFunction.js';
 import { useEffect, useState } from "react";
 import PrimaryLoader from "../../utils/loaders/PrimaryLoader.jsx";
-import Cookies from "js-cookie";
 
 
 const Cart = () => {
@@ -232,7 +229,7 @@ const Cart = () => {
     <div className={styles.container}>
       <h1 className={styles.cartHeading}>CART</h1>
       <div className={styles.cartContainer}>
-        <div className={styles.leftCart}>
+        <div className={styles.leftCart} style={{width : "100%"}} >
           <div className={`${styles.cartGrid} ${styles.cartGrid1}`}>
             <p><span>PRODUCT</span> NAME</p>
             <p className={styles.quantityDesktop}>QUANTITY</p>
@@ -259,7 +256,7 @@ const Cart = () => {
         </div>
 
         {/* <CartList  /> */}
-        <div>
+        <div style={{width:"100%"}} >
           <div className={styles.rightCart}>
             <div className={styles.topRightCart}>
               {completeCart?.orderItems?.map((item, i) => (
