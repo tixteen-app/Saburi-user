@@ -1,12 +1,16 @@
 import styles from "./footer.module.css"
 import { assets } from "../../assets/assets"
 import { Link } from "react-router-dom"
+import {motion} from "framer-motion"
 
 const Footer = () => {
 	return (
 		<div className={styles.container}>
 			<div className={styles.footerContainer}>
-				<img
+				<motion.img
+				initial={{ opacity: 0 , scale: 0.5 }}
+				whileInView={{ opacity: 1, scale: 1 }}
+				transition={{ duration: 0.7 }}
 					src={assets.logo}
 					alt="Saburi logo"
 					className={styles.logo}
@@ -16,12 +20,18 @@ const Footer = () => {
 						to={"https://www.instagram.com/saburiteaofficial/"}
 						target="_blank"
 					>
-						<img
+						<motion.img
+							initial={{ opacity: 0 , scale: 0.5 }}
+							whileInView={{ opacity: 1, scale: 1 }}
+							transition={{ duration: 0.7 }}
 							src={assets.insta_icon}
 							alt="saburi instagram"
 						/>
 					</Link>
-					<img
+					<motion.img
+						initial={{ opacity: 0 , scale: 0.3 }}
+						whileInView={{ opacity: 1, scale: 1 }}
+						transition={{ duration: 0.7 , delay: 0.4 }}
 						src={assets.twiter_icon}
 						alt="Saburi Twitter"
 					/>
@@ -29,7 +39,10 @@ const Footer = () => {
 						to={"https://www.facebook.com/teasaburi"}
 						target="_blank"
 					>
-						<img
+						<motion.img
+							initial={{ opacity: 0 , scale: 0.2 }}
+							whileInView={{ opacity: 1, scale: 1 }}
+							transition={{ duration: 0.8 , delay: 0.6 }}
 							src={assets.facebook_icon}
 							alt="saburi facebook"
 						/>

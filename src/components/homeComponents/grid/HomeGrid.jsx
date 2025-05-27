@@ -1,11 +1,17 @@
 import { useNavigate } from "react-router-dom"
 import { assets } from "../../../assets/assets"
 import styles from "./homeGrid.module.css"
+import {motion} from "framer-motion"
 
 const HomeGrid = () => {
 	const navigate = useNavigate()
 	return (
-		<div className={styles.container}>
+		<motion.div
+		initial={{ opacity: 0, y: 50 }}
+		whileInView={{ opacity: 1, y: 0 }}
+		viewport={{ once: false, margin: "-20%" }}
+		transition={{ duration: 0.7 }}
+		className={styles.container}>
 			<div className={styles.grid1}>
 				<img
 					src={assets.masala_chai_banner}
@@ -31,7 +37,7 @@ const HomeGrid = () => {
 					alt="Tea banner"
 				/>
 			</div>
-		</div>
+		</motion.div>
 	)
 }
 

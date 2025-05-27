@@ -1076,7 +1076,7 @@ const Profile = () => {
 										{order.orderItems.map((item, i) => (
 											<div key={i} >
 												<img className="myorder-img-product" style={{ maxWidth: "50px" }} loading="lazy" src={item?.product?.thumbnail} alt={item?.product?.name} />
-												{/* <p>{item.product.name},<span style={{ fontSize: "12px" }} > {item.size.size} {item?.size?.sizetype}</span> </p> */}
+												<p>{item.product.name},<span style={{ fontSize: "12px" }} > {item.product.size} {item?.product?.sizeType}</span> </p>
 												<p><span style={{ fontSize: "12px" }} > {item.singleProductPrice}x{item.quantity}=₹{item?.totalPrice}</span> </p>
 											</div>
 										))
