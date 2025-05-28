@@ -17,24 +17,63 @@ export const fetchWishlist = async (setWishlistItems) => {
   }
 };
 
-export const fetchCart = async (setCartItems, setCompleteCart, setFetchCartLoader) => {
-  setFetchCartLoader(true);
+// export const fetchCart = async (setCartItems, setCompleteCart, setFetchCartLoader) => {
+//   setFetchCartLoader(true);
+//   try {
+//     const response = await makeApi("/api/my-cart", "GET");
+
+//     // Check if response.data exists and has orderItems
+//     if (!response?.data) {
+//       console.error("No data in response");
+//       return;
+//     }
+
+//     // Set cart id in cookie if it exists
+//     if (response.data._id) {
+//       Cookies.set("cartId", response.data._id, { expires: 2 });
+//       Cookies.set("cardItem", JSON.stringify(response.data), { expires: 2 });
+//     }
+
+//     // Safely handle orderItems (default to empty array if not present)
+//     const orderItems = response.data.orderItems || [];
+//     const cartItems = orderItems.map(item => ({
+//       productId: item?.productId?._id,
+//       quantity: item?.quantity,
+//       size: item?.size?._id,
+//     }));
+    
+//     setCartItems(cartItems);
+    
+//     if (setCompleteCart) {
+//       setCompleteCart(response.data);
+//     }
+    
+//     updateCartCount(cartItems);
+//   } catch (error) {
+//     console.error("Error fetching cart:", error);
+//   } finally {
+//     setFetchCartLoader(false);  
+//   }
+// };
+
+
+export const fetchCart = async (setCartItems, setCompleteCart, setFetchCartLoader, suppressLoader = false) => {
+  if (!suppressLoader) {
+    setFetchCartLoader && setFetchCartLoader(true);
+  }
   try {
     const response = await makeApi("/api/my-cart", "GET");
 
-    // Check if response.data exists and has orderItems
     if (!response?.data) {
       console.error("No data in response");
       return;
     }
 
-    // Set cart id in cookie if it exists
     if (response.data._id) {
       Cookies.set("cartId", response.data._id, { expires: 2 });
       Cookies.set("cardItem", JSON.stringify(response.data), { expires: 2 });
     }
 
-    // Safely handle orderItems (default to empty array if not present)
     const orderItems = response.data.orderItems || [];
     const cartItems = orderItems.map(item => ({
       productId: item?.productId?._id,
@@ -52,7 +91,9 @@ export const fetchCart = async (setCartItems, setCompleteCart, setFetchCartLoade
   } catch (error) {
     console.error("Error fetching cart:", error);
   } finally {
-    setFetchCartLoader(false);  
+    if (!suppressLoader) {
+      setFetchCartLoader && setFetchCartLoader(false);
+    }
   }
 };
 
@@ -73,10 +114,12 @@ export const addToCart = async (
   }
 
   try {
-    setProductLoaders((prevState) => ({
-      ...prevState,
-      [productId]: true,
-    }));
+    if (setProductLoaders) {
+      setProductLoaders((prevState) => ({
+        ...prevState,
+        [productId]: true,
+      }));
+    }
 
     const method = "POST";
     const endpoint = "/api/add-to-cart";
@@ -87,18 +130,19 @@ export const addToCart = async (
       shippingPrice: 0,
     });
 
-    // fetchCart(setCartItems);
-    const updatedCartItems = Cookies.get("cartItems") ? JSON.parse(Cookies.get("cartItems")) : [];
-    const newCartItem = { productId, quantity: 1, size: selectProductSize };
-    updatedCartItems.push(newCartItem);
-    Cookies.set("cartItems", JSON.stringify(updatedCartItems), { expires: 2 });
+    // Pass true to suppress loader during quantity changes
+    if (fetchCart && setCartItems) {
+      await fetchCart(setCartItems, null, null, true);
+    }
   } catch (error) {
     console.log(error.response.data);
   } finally {
-    setProductLoaders((prevState) => ({
-      ...prevState,
-      [productId]: false,
-    }));
+    if (setProductLoaders) {
+      setProductLoaders((prevState) => ({
+        ...prevState,
+        [productId]: false,
+      }));
+    }
   }
 };
 
@@ -110,27 +154,117 @@ export const removeFromCart = async (
   selectProductSize
 ) => {
   try {
-    setProductLoaders((prevState) => ({
-      ...prevState,
-      [productId]: true, 
-    }));
+    if (setProductLoaders) {
+      setProductLoaders((prevState) => ({
+        ...prevState,
+        [productId]: true, 
+      }));
+    }
+
     const method = "POST";
     const endpoint = "/api/remove-from-cart";
-    await makeApi(endpoint, method, { productId , selectProductSize });
+    await makeApi(endpoint, method, { productId, selectProductSize });
 
-    // fetchCart(setCartItems);
-    let updatedCartItems = Cookies.get("cartItems") ? JSON.parse(Cookies.get("cartItems")) : [];
-    updatedCartItems = updatedCartItems.filter(item => item.productId !== productId);
-    Cookies.set("cartItems", JSON.stringify(updatedCartItems), { expires: 2 });
+    // Pass true to suppress loader during quantity changes
+    if (fetchCart && setCartItems) {
+      await fetchCart(setCartItems, null, null, true);
+    }
   } catch (error) {
     console.log(error);
   } finally {
-    setProductLoaders((prevState) => ({
-      ...prevState,
-      [productId]: false,
-    }));
+    if (setProductLoaders) {
+      setProductLoaders((prevState) => ({
+        ...prevState,
+        [productId]: false,
+      }));
+    }
   }
 };
+
+// export const addToCart = async (
+//   productId,
+//   setIsLogin,
+//   setShowPopup,
+//   fetchCart,
+//   setCartItems,
+//   setProductLoaders,
+//   selectProductSize
+// ) => {
+//   const token = localStorage.getItem("token");
+//   if (!token) {
+//     setIsLogin(false);
+//     setShowPopup(true);
+//     return;
+//   }
+
+//   try {
+//     if (setProductLoaders) {
+//       setProductLoaders((prevState) => ({
+//         ...prevState,
+//         [productId]: true,
+//       }));
+//     }
+
+//     const method = "POST";
+//     const endpoint = "/api/add-to-cart";
+//     await makeApi(endpoint, method, {
+//       productId,
+//       selectProductSize,
+//       quantity: 1,
+//       shippingPrice: 0,
+//     });
+
+//     // Always fetch fresh cart data from server
+//     if (fetchCart && setCartItems) {
+//       await fetchCart(setCartItems);
+//     }
+//   } catch (error) {
+//     console.log(error.response.data);
+//   } finally {
+//     if (setProductLoaders) {
+//       setProductLoaders((prevState) => ({
+//         ...prevState,
+//         [productId]: false,
+//       }));
+//     }
+//   }
+// };
+
+
+// export const removeFromCart = async (
+//   productId,
+//   setProductLoaders,
+//   setCartItems,
+//   fetchCart,
+//   selectProductSize
+// ) => {
+//   try {
+//     if (setProductLoaders) {
+//       setProductLoaders((prevState) => ({
+//         ...prevState,
+//         [productId]: true, 
+//       }));
+//     }
+
+//     const method = "POST";
+//     const endpoint = "/api/remove-from-cart";
+//     await makeApi(endpoint, method, { productId, selectProductSize });
+
+//     // Always fetch fresh cart data from server
+//     if (fetchCart && setCartItems) {
+//       await fetchCart(setCartItems);
+//     }
+//   } catch (error) {
+//     console.log(error);
+//   } finally {
+//     if (setProductLoaders) {
+//       setProductLoaders((prevState) => ({
+//         ...prevState,
+//         [productId]: false,
+//       }));
+//     }
+//   }
+// };
 export const deleteproductFromCart = async (
   productId,
   setProductLoaders,

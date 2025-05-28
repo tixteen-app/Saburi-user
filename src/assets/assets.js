@@ -51,12 +51,14 @@ export const assets = {
 	star_icon,
 	store4,
 	razorpay,
+	flavor1,
 }
 
 import flavor1 from "./products/flavor1.png"
 import flavor2 from "./products/flavor2.png"
 import flavor3 from "./products/flavor3.png"
 import flavor4 from "./products/flavor4.png"
+
 
 export const flavorsOfChai = [
 	{
