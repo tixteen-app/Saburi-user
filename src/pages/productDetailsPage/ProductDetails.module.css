@@ -1,5 +1,4 @@
 /* ProductDetails.module.css */
-
 .container {
   width: 86%;
   min-height: 100vh;
@@ -40,15 +39,17 @@
   gap: 20px;
   width: 50%;
   max-width: 600px;
+  position: relative;
 }
 
 .mainImageContainer {
   position: relative;
   border: 1px solid #eee;
   border-radius: 10px;
-  /* overflow: hidden; */
   background: #fff;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  overflow: hidden;
 }
 
 .desktopImage {
@@ -58,6 +59,11 @@
   align-items: center;
   justify-content: center;
   background: #f9f9f9;
+  position: relative;
+}
+
+.desktopImage:hover {
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
 }
 
 .mobileImage {
@@ -67,7 +73,6 @@
   object-fit: contain;
 }
 
-/* Thumbnail Gallery Styles */
 .thumbnailGallery {
   display: flex;
   align-items: center;
@@ -78,15 +83,14 @@
 .thumbnailsContainer {
   display: flex;
   gap: 10px;
-  /* overflow-x: auto; */
   scroll-behavior: smooth;
-  scrollbar-width: none; /* Firefox */
-  /* -ms-overflow-style: none; */
+  scrollbar-width: none;
   padding: 5px 0;
+  overflow-x: auto;
 }
 
 .thumbnailsContainer::-webkit-scrollbar {
-  display: none; /* Chrome, Safari, Opera */
+  display: none;
 }
 
 .thumbnailItem {
@@ -135,11 +139,6 @@
   background: var(--green);
   color: #fff;
   border-color: var(--green);
-}
-
-.thumbnailScrollButton:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
 }
 
 .content {
@@ -201,8 +200,9 @@
 }
 
 .selectedSize {
+  background-color: rgba(0, 128, 0, 0.5);
+  color: white;
   font-weight: bolder;
-  color: var(--green); 
 }
 
 .rightContent {
@@ -280,28 +280,49 @@
   padding: 0 10px;
 }
 
-.selectedSize {
-  background-color: rgba(0, 128, 0, 0.5);
-  color: white; 
-}
-
 .rightContent p span {
   font-size: 19px;
   font-weight: 300;
   margin-left: 10px;
   text-decoration: line-through;
   color: rgba(0, 0, 0, 0.55);
-  text-decoration-color: red;
 }
 
-/* Responsive Styles */
+/* Zoom Image Styles */
+.react-image-magnify-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.react-image-magnify-enlarged-image-container {
+  position: fixed !important;
+  left: 50% !important;
+  top: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  width: 500px !important;
+  height: 500px !important;
+  z-index: 1000000 !important;
+  background: #fff !important;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.3) !important;
+  border: 1px solid #eee !important;
+  border-radius: 8px !important;
+  overflow: hidden !important;
+}
+
+.react-image-magnify-enlarged-image {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain !important;
+}
+
 @media(max-width:1100px) {
   .container {
     width: 96%;
     gap: 30px;
   }
 
-  .leftContent div h1 {
+  .productTitle h1 {
     font-size: 2.3rem;
   }
 
@@ -318,7 +339,7 @@
     min-height: 90vh;
   }
 
-  .leftContent div h1 {
+  .productTitle h1 {
     font-size: 2rem;
   }
 
@@ -328,11 +349,9 @@
   }
 
   .content {
-    display: flex;
     flex-direction: column;
     max-width: 600px;
     gap: 50px;
-    justify-content: space-around;
     margin-bottom: 30px;
   }
 
@@ -356,13 +375,12 @@
   }
 
   .content {
-    justify-content: space-around;
     padding: 0 10px;
     width: 80%;
   }
 
   .desktopImage {
-    display: none;
+    display: none !important;
   }
 
   .mobileImage {
@@ -370,9 +388,12 @@
   }
 
   .backButton {
-    position: absolute;
     top: -6%;
     left: 0;
+  }
+
+  .react-image-magnify-enlarged-image-container {
+    display: none !important;
   }
 }
 
@@ -380,19 +401,15 @@
   .container {
     width: 96%;
     gap: 30px;
-    min-height: 100vh;
-    flex-direction: column;
-    margin-top: 70px;
   }
   
   .content {
-    justify-content: space-around;
     padding: 0 10px;
     gap: 24px;
     width: 90%;
   }
 
-  .leftContent div h1 {
+  .productTitle h1 {
     font-size: 1.8rem;
   }
 
@@ -403,99 +420,5 @@
   .thumbnailItem {
     min-width: 60px;
     height: 60px;
-  }
-}
-
-/* Add these styles to your existing CSS */
-
-.imageSection {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  width: 50%;
-  max-width: 600px;
-  position: relative;
-}
-
-.imageZoomContainer {
-  position: relative;
-  width: 100%;
-}
-
-.mainImageContainer {
-  position: relative;
-  border: 1px solid #eee;
-  border-radius: 10px;
-  overflow: hidden;
-  background: #fff;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  width: 100%;
-}
-
-.desktopImage {
-  width: 100%;
-  height: 450px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #f9f9f9;
-  position: relative;
-}
-
-/* Zoom image positioning */
-.react-image-magnify-container {
-  position: relative !important;
-}
-
-.react-image-magnify-enlarged-image-container {
-  position: absolute !important;
-  left: calc(100% + 20px) !important;
-  top: 0 !important;
-  z-index: 1000 !important;
-  background: #fff !important;
-  box-shadow: 0 0 20px rgba(0,0,0,0.2) !important;
-  border: 1px solid #eee !important;
-}
-
-/* Mobile responsive adjustments */
-@media (max-width: 700px) {
-  .imageSection {
-    width: 100%;
-  }
-  
-  .react-image-magnify-enlarged-image-container {
-    display: none !important;
-  }
-}
-
-.largeZoom{
-  background: #000 !important;
-}
-
-
-/* Add these styles to your existing CSS */
-.react-image-magnify-container {
-  position: relative;
-}
-
-.react-image-magnify-enlarged-image-container {
-  position: absolute !important;
-  left: calc(100% + 20px) !important;
-  top: 0 !important;
-  z-index: 1000 !important;
-  background: #fff !important;
-  box-shadow: 0 0 20px rgba(0,0,0,0.2) !important;
-  border: 1px solid #eee !important;
-}
-
-/* Ensure the container has enough space for the zoomed image */
-.imageSection {
-  position: relative;
-}
-
-/* Mobile responsive adjustments */
-@media (max-width: 700px) {
-  .react-image-magnify-enlarged-image-container {
-    display: none !important;
   }
 }

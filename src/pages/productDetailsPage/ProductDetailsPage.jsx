@@ -577,8 +577,8 @@ const ProductDetailsPage = () => {
                     },
                     largeImage: {
                       src: product.image[selectedIndex],
-                      width: 2500,
-                      height: 2500,
+                      width: 1500,
+                      height: 1500,
                       className: styles.largeZoom
                     },
                     enlargedImageContainerStyle: {
