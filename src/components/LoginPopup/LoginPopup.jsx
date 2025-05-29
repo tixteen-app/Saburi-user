@@ -278,6 +278,8 @@ const LoginPopup = ({ setLoginPopup }) => {
                                 {googleLoading ? <PrimaryLoader /> : 'Sign in with Google'}
                             </button>
                         </div>
+
+                        
                     </div>
                 </div>
             </div>
